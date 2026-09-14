@@ -1,6 +1,8 @@
 package Pokemones;
 
 import Exepciones.Exepcions;
+import Tipos.Tipos;
+
 
 abstract public class Pokemon {
     final private String NAME;
@@ -11,12 +13,13 @@ abstract public class Pokemon {
     private int defenseEspecial;
     private int velocidad;
     final private int ID;
-    final private int tipo1 = 1;
-    final private int tipo2 = 1;
+    final private int[] tipos = new int[2];
 
 
-    // Constructor Principal
-    protected Pokemon(String name, int vida , int ataque , int defensa ,int ataqueEspecial , int defenseEspecial , int velocidad , int ID) {
+
+
+    // Constructor Principal 1Tipo unico
+    protected Pokemon(String name, int vida , int ataque , int defensa ,int ataqueEspecial , int defenseEspecial , int velocidad , int ID , int tipo) {
         this.NAME = setNAME(name);
         this.setVida(vida);
         this.setAtaque(ataque);
@@ -25,7 +28,28 @@ abstract public class Pokemon {
         this.setDefenseEspecial(defenseEspecial);
         this.setVelocidad(velocidad);
         this.ID = setID(ID);
+        this.tipos[0] = setTipo1(tipo);
+        this.tipos[1] = 0;
     }
+
+    // Constructor 2 tipos asignados
+    protected Pokemon(String name, int vida , int ataque , int defensa ,int ataqueEspecial , int defenseEspecial , int velocidad , int ID , int tipo1 ,int tipo2) {
+        this.NAME = setNAME(name);
+        this.setVida(vida);
+        this.setAtaque(ataque);
+        this.setAtaqueEspecial(ataqueEspecial);
+        this.setDefensa(defensa);
+        this.setDefenseEspecial(defenseEspecial);
+        this.setVelocidad(velocidad);
+        this.ID = setID(ID);
+        this.tipos[0] = setTipo1(tipo1);
+        this.tipos[1] = setTipo2(tipo2);
+    }
+
+    public int[] getTipos() {
+        return tipos;
+    }
+
 
     // GETTER AND SETTERS
 
@@ -119,13 +143,28 @@ abstract public class Pokemon {
     }
 
     public int getTipo1() {
-        return tipo1;
+        return tipos[0];
+    }
+
+    public int setTipo1(int tipo1) {
+        if (tipo1<0 || tipo1>12) {
+            throw new IllegalArgumentException("Tipo No existente");
+        } else {
+            return tipo1;
+        }
     }
 
     public int getTipo2() {
-        return tipo2;
+        return tipos[1];
     }
 
+    public int setTipo2(int tipo2) {
+        if (tipo2 <0 || tipo2 >12) {
+            throw new IllegalArgumentException("Tipo No existente");
+        } else {
+            return tipo2;
+        }
+    }
 
     // print ID ME SIRVE PARA MOSTRAR LA ID EN UN FORMATO MAS FORMAS
     // EJEMPLO 1 --> 001
@@ -143,9 +182,8 @@ abstract public class Pokemon {
         System.out.println("ATAQUE ESPECIAL : " + getAtaqueEspecial() );
         System.out.println("DEFENSA ESPECIAL : " + getDefenseEspecial());
         System.out.println("VELOCIDAD : " + getVelocidad());
+        Tipos.showTipos(tipos);
+
     }
-
-
-
 
 } // class pokemon

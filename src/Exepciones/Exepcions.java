@@ -9,7 +9,7 @@ public class Exepcions extends RuntimeException{
         Scanner scanner = new Scanner(System.in);
         while (texto.isEmpty()) {
             try {
-                System.out.println("NOMBRE VACIO");
+                System.out.println("NOMBRE VACIO !!!!!");
                 texto = scanner.nextLine();
             } catch (Exception e) {
                 System.out.print("Dato invalido ingrese nuevamente");

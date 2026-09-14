@@ -1,3 +1,4 @@
+import Entrenador.Npc;
 import Pokemones.Pokemon;
 
 public class Combat {

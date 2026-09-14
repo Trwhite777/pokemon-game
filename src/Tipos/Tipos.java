@@ -1,5 +1,4 @@
 package Tipos;
-
 import Pokemones.Pokemon;
 
 public class Tipos {
@@ -10,58 +9,72 @@ public class Tipos {
     }
 
 
-    public static void printTipos (int tipo) {
-        switch (tipo) {
+    public static void   showTipos(int[]tipo) {
+        if (tipo[1]  ==0) {
+            Tipos.searchTipos(tipo[0]);
+        } else {
+            Tipos.searchTipos(tipo[0]);
+            System.out.print("/");
+            Tipos.searchTipos(tipo[1]);
+        }
+
+    }//showTipos
+
+    public static void searchTipos(int tip) {
+        switch (tip) {
             case 1:
-                System.out.println("Normal");
+                System.out.print("Normal");
                 break;
             case 2:
-                System.out.println("Fuego");
+                System.out.print("Fuego");
                 break;
             case 3:
-                System.out.println("Agua");
+                System.out.print("Agua");
                 break;
             case 4:
-                System.out.println("Electrico");
+                System.out.print("Electrico");
                 break;
             case 5:
-                System.out.println("Planta");
+                System.out.print("Planta");
                 break;
             case 6:
-                System.out.println("Hielo");
+                System.out.print("Hielo");
                 break;
             case 7:
-                System.out.println("Lucha");
+                System.out.print("Lucha");
                 break;
             case 8:
-                System.out.println("Veneno");
+                System.out.print("Veneno");
                 break;
             case 9:
-                System.out.println("Tierra");
+                System.out.print("Tierra");
                 break;
             case 10:
-                System.out.println("Volador");
+                System.out.print("Volador");
                 break;
             case 11:
-                System.out.println("Psiquico");
-                break;
+                System.out.print("Psiquico");
+            break;
             case 12:
-                System.out.println("Insecto");
-                break;
+                System.out.print("Insecto");
+            break;
             case 13:
-                System.out.println("Roca");
+                System.out.print("Roca");
                 break;
             case 14:
-                System.out.println("Fantasma");
+                System.out.print("Fantasma");
                 break;
             case 15:
-                System.out.println("Dragon");
+                System.out.print("Dragon");
                 break;
             default:
-                System.out.println("null");
+                System.out.print("null");
 
         }
     }
+
+
+
 
 
 }
