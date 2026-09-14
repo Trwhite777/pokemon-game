@@ -73,6 +73,14 @@ public class Tipos {
         }
     }
 
+    public static void showClase (int clase) {
+        if (clase==0) {
+            System.out.println("CLASE : FISICO");
+        } else {
+            System.out.println("CLASE : ESPECIAL");
+        }
+    }
+
 
 
 

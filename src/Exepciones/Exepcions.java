@@ -18,7 +18,27 @@ public class Exepcions extends RuntimeException{
         return texto;
     }
 
+    public static int numerosNegativos (int num) {
+        if (num<0) {
+            throw new IllegalArgumentException("NUMERO NO PUEDE SER NEGATIVO");
+        } else {
+            return num;
+        }
+    }
 
+    public static int tipoNoExsitente (int num) {
+        if (num<0 && num>12) {
+            throw new IllegalArgumentException("TIPO NO EXISTENTE");
+        }
+        return num;
+    }
+
+    public static int claseMovimientoNovalida (int num) {
+        if (num!=0 && num!=1) {
+            throw new IllegalArgumentException("CLASE DE MOVIMIENTO NO VALIDA");
+        }
+        return num;
+    }
 
 
 

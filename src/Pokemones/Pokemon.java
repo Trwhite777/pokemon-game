@@ -1,7 +1,11 @@
 package Pokemones;
 
+import Ataques.Ataque;
+import Ataques.Ataque;
 import Exepciones.Exepcions;
 import Tipos.Tipos;
+
+import java.util.ArrayList;
 
 
 abstract public class Pokemon {
@@ -14,9 +18,7 @@ abstract public class Pokemon {
     private int velocidad;
     final private int ID;
     final private int[] tipos = new int[2];
-
-
-
+    private static ArrayList ataques = new ArrayList<Ataque>(4);
 
     // Constructor Principal 1Tipo unico
     protected Pokemon(String name, int vida , int ataque , int defensa ,int ataqueEspecial , int defenseEspecial , int velocidad , int ID , int tipo) {
@@ -166,6 +168,17 @@ abstract public class Pokemon {
         }
     }
 
+    public ArrayList<Ataque> getMovSet() {
+        return ataques;
+    }
+
+    public Pokemon setMovSet(ArrayList<Ataque> movSet) {
+        this.ataques = ataques;
+        return this;
+    }
+
+
+
     // print ID ME SIRVE PARA MOSTRAR LA ID EN UN FORMATO MAS FORMAS
     // EJEMPLO 1 --> 001
     public void printID (int ID) {
@@ -185,5 +198,17 @@ abstract public class Pokemon {
         Tipos.showTipos(tipos);
 
     }
+
+    public void addAtaque(Ataque ataque) {
+        ataques.add(ataque);
+    }
+
+    public  void showMovSet (ArrayList<Ataque> ataques) {
+        for (Ataque ataque1 : ataques) {
+            ataque1.showMov();
+        }
+    }
+
+
 
 } // class pokemon

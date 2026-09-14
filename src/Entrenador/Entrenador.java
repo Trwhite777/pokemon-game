@@ -1,5 +1,6 @@
 package Entrenador;
 
+import Ataques.Ataque;
 import Exepciones.Exepcions;
 import Pokemones.Pokemon;
 import Tipos.Tipos;
@@ -9,7 +10,7 @@ import java.util.Objects;
 
 public class Entrenador {
 
-    private ArrayList<Pokemon> pokemonList = new ArrayList<Pokemon>(6);  ;
+    private ArrayList pokemonList = new ArrayList<Pokemon>(6);  ;
     final private String NAMEUSER;
     final private int IDENTRENADOR = 6531;
     private int Dinero = 0;
@@ -66,6 +67,14 @@ public class Entrenador {
             System.out.print(pokemos.getNAME() + ": "); Tipos.showTipos(pokemos.getTipos());
             System.out.println();
         }
+    }
+
+    public void showPokemon (int num) {
+        Pokemon pokemon = (Pokemon) pokemonList.get(num);
+        System.out.print("pokemon " + num + " " +pokemon.getNAME() +  " ");
+        System.out.println();
+        pokemon.showMovSet(pokemon.getMovSet());
+        System.out.println();
     }
 
 
