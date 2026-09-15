@@ -69,11 +69,11 @@ public class Entrenador {
         }
     }
 
-    public void showPokemon (int num) {
+    public void showPokemonAtaques (int num) {
         Pokemon pokemon = (Pokemon) pokemonList.get(num);
         System.out.print("pokemon " + num + " " +pokemon.getNAME() +  " ");
         System.out.println();
-        pokemon.showMovSet(pokemon.getMovSet());
+        pokemon.showAtaques(pokemon.getAtaques());
         System.out.println();
     }
 

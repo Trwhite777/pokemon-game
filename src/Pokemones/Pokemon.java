@@ -18,7 +18,7 @@ abstract public class Pokemon {
     private int velocidad;
     final private int ID;
     final private int[] tipos = new int[2];
-    private static ArrayList ataques = new ArrayList<Ataque>(4);
+    private ArrayList ataques = new ArrayList<Ataque>(4);
 
     // Constructor Principal 1Tipo unico
     protected Pokemon(String name, int vida , int ataque , int defensa ,int ataqueEspecial , int defenseEspecial , int velocidad , int ID , int tipo) {
@@ -168,16 +168,17 @@ abstract public class Pokemon {
         }
     }
 
-    public ArrayList<Ataque> getMovSet() {
+    public ArrayList<Ataque> getAtaques() {
         return ataques;
     }
 
-    public Pokemon setMovSet(ArrayList<Ataque> movSet) {
+    public Pokemon setAtaques(ArrayList ataques) {
         this.ataques = ataques;
         return this;
     }
 
 
+    // METODOS PROPIOS
 
     // print ID ME SIRVE PARA MOSTRAR LA ID EN UN FORMATO MAS FORMAS
     // EJEMPLO 1 --> 001
@@ -199,13 +200,15 @@ abstract public class Pokemon {
 
     }
 
+
     public void addAtaque(Ataque ataque) {
-        ataques.add(ataque);
+        this.ataques.add(ataque);
     }
 
-    public  void showMovSet (ArrayList<Ataque> ataques) {
+
+    public  void showAtaques (ArrayList<Ataque> ataques) {
         for (Ataque ataque1 : ataques) {
-            ataque1.showMov();
+            System.out.println(ataque1.getName());
         }
     }
 
