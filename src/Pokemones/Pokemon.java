@@ -1,7 +1,6 @@
 package Pokemones;
 
 import Ataques.Ataque;
-import Ataques.Ataque;
 import Exepciones.Exepcions;
 import Tipos.Tipos;
 
@@ -17,10 +16,11 @@ abstract public class Pokemon {
     private int defenseEspecial;
     private int velocidad;
     final private int ID;
-    final private int[] tipos = new int[2];
+    final private int[] TIPOS = new int[2];
     private ArrayList ataques = new ArrayList<Ataque>(4);
+    final private int nivel= 10;
 
-    // Constructor Principal 1Tipo unico
+    // Constructor Principal 1 Tipo
     protected Pokemon(String name, int vida , int ataque , int defensa ,int ataqueEspecial , int defenseEspecial , int velocidad , int ID , int tipo) {
         this.NAME = setNAME(name);
         this.setVida(vida);
@@ -30,8 +30,8 @@ abstract public class Pokemon {
         this.setDefenseEspecial(defenseEspecial);
         this.setVelocidad(velocidad);
         this.ID = setID(ID);
-        this.tipos[0] = setTipo1(tipo);
-        this.tipos[1] = 0;
+        this.TIPOS[0] = setTipo1(tipo);
+        this.TIPOS[1] = 15;
     }
 
     // Constructor 2 tipos asignados
@@ -44,16 +44,16 @@ abstract public class Pokemon {
         this.setDefenseEspecial(defenseEspecial);
         this.setVelocidad(velocidad);
         this.ID = setID(ID);
-        this.tipos[0] = setTipo1(tipo1);
-        this.tipos[1] = setTipo2(tipo2);
+        this.TIPOS[0] = setTipo1(tipo1);
+        this.TIPOS[1] = setTipo2(tipo2);
     }
 
-    public int[] getTipos() {
-        return tipos;
-    }
 
 
     // GETTER AND SETTERS
+
+
+
 
     public String getNAME() {
         return NAME;
@@ -144,8 +144,12 @@ abstract public class Pokemon {
         return ID;
     }
 
+    public int[] getTIPOS() {
+        return TIPOS;
+    }
+
     public int getTipo1() {
-        return tipos[0];
+        return TIPOS[0];
     }
 
     public int setTipo1(int tipo1) {
@@ -157,7 +161,7 @@ abstract public class Pokemon {
     }
 
     public int getTipo2() {
-        return tipos[1];
+        return TIPOS[1];
     }
 
     public int setTipo2(int tipo2) {
@@ -170,6 +174,10 @@ abstract public class Pokemon {
 
     public ArrayList<Ataque> getAtaques() {
         return ataques;
+    }
+
+    public Ataque getMovimientoAtaque(int movimento) {
+        return (Ataque) ataques.get(movimento);
     }
 
     public Pokemon setAtaques(ArrayList ataques) {
@@ -196,7 +204,7 @@ abstract public class Pokemon {
         System.out.println("ATAQUE ESPECIAL : " + getAtaqueEspecial() );
         System.out.println("DEFENSA ESPECIAL : " + getDefenseEspecial());
         System.out.println("VELOCIDAD : " + getVelocidad());
-        Tipos.showTipos(tipos);
+        Tipos.showTipos(TIPOS);
 
     }
 
@@ -210,6 +218,41 @@ abstract public class Pokemon {
         for (Ataque ataque1 : ataques) {
             System.out.println(ataque1.getName());
         }
+    }
+
+    public void atacarPokemon (Ataque ataque , Pokemon pokemonAtacante, Pokemon pokemonDefensor){
+
+
+        System.out.println(pokemonAtacante.getNAME() + " USO " + ataque.getName() + " CONTRA "  + pokemonDefensor.getNAME()  );
+
+        // una variable que como dice su me servira para variar el daño generado no se siempre el mismo
+        double variacion = Math.random()*(1 - 0.85) + 0.85;
+        // (pokemon.getAtaque)+2
+
+        double stab;
+        //STAB (Same Type Attack Bonus): Multiplicador de 1.5 si el tipo del movimiento coincide con uno de los tipos del Pokémon que lo usa. Si no coincide, es 1.0.
+        if (ataque.getTipo()==pokemonAtacante.getTipo1() || ataque.getTipo()==pokemonAtacante.getTipo2()) {
+            stab = 1.5;
+        } else {
+            stab = 1.0;
+        }
+
+        double efectividad = Tipos.calculator_Efectividad(ataque.getTipo() , pokemonDefensor.getTIPOS() );
+
+
+        double subdano = 1;
+        double danoTotal;
+
+        if (ataque.getClase()==0) {
+            // ataque especial
+            subdano =  ((((2.0 * 10) / 5.0 + 2.0) * ataque.getPotencia() * ((double) pokemonAtacante.getAtaque() / pokemonDefensor.getDefensa())) / 50.0) + 2.0;
+            danoTotal =  subdano * (stab * efectividad * variacion);
+        } else {
+            double danioBase = ((((2.0 * nivel) / 5.0 + 2.0) * ataque.getPotencia() * ((double) pokemonAtacante.getAtaqueEspecial() / pokemonDefensor.getDefenseEspecial())) / 50.0) + 2.0;
+            danoTotal =  (   subdano * (stab * efectividad * variacion));
+        }
+        System.out.println(danoTotal);
+
     }
 
 

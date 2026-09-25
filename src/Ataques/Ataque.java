@@ -54,13 +54,20 @@ public class Ataque {
         return pp;
     }
 
+    public void showClase (int clase) {
+        if (clase==0) {
+            System.out.println("CLASE : FISICO");
+        } else {
+            System.out.println("CLASE : ESPECIAL");
+        }
+    }
+
     public void showMov () {
         System.out.println( "Nombre :"+ getName());
         System.out.println("Descripcion " + getDescripcion());
         System.out.print("TIPO : ");
-        Tipos.searchTipos(getTipo());
-        System.out.println();
-        Tipos.showClase(getClase());
+        System.out.println(Tipos.getTiposArray(getTipo()));
+        showClase(getClase());
         System.out.println("Potencia :" +getPotencia());
         System.out.println("Precision : " + getPrecision());
         System.out.println("PP : " + getPp());
