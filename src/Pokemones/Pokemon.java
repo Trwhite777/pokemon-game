@@ -17,7 +17,8 @@ abstract public class Pokemon {
     private int velocidad;
     final private int ID;
     final private int[] TIPOS = new int[2];
-    private ArrayList ataques = new ArrayList<Ataque>(4);
+    private Ataque[] ataques = new Ataque[4];
+    private int contadorAtaques = 0;
     final private int nivel= 10;
 
     // Constructor Principal 1 Tipo
@@ -51,8 +52,6 @@ abstract public class Pokemon {
 
 
     // GETTER AND SETTERS
-
-
 
 
     public String getNAME() {
@@ -172,32 +171,46 @@ abstract public class Pokemon {
         }
     }
 
-    public ArrayList<Ataque> getAtaques() {
+    // GETTERS Y SETTER CON LA CLASE ATAQUE
+
+    public Ataque[] getAtaques() {
         return ataques;
     }
 
-    public Ataque getMovimientoAtaque(int movimento) {
-        return (Ataque) ataques.get(movimento);
+    public Ataque getAtaqueSelect(int numeroAtaque) {
+        return ataques[numeroAtaque];
     }
 
-    public Pokemon setAtaques(ArrayList ataques) {
-        this.ataques = ataques;
-        return this;
+    public void addAtaque(Ataque ataque) {
+        if (contadorAtaques<ataques.length) {
+            ataques[contadorAtaques] = ataque;
+            contadorAtaques++;
+        } else {
+            ataquesLlenos();
+        }
     }
 
+    public void ataquesLlenos () {
+        System.out.println("TU POKEMON NO PUEDE APRENDER MAS ATAQUES");
+        for (int i = 0 ; i<contadorAtaques ; i++) {
+            System.out.println(this.ataques[contadorAtaques].getName() + i);
+        }
+        System.out.println("CUAL ATAQUE QUIERES REMPLAZAR?");
+    }
 
-    // METODOS PROPIOS
+    // METODOS PROPIOS PINTAR DATOS
 
     // print ID ME SIRVE PARA MOSTRAR LA ID EN UN FORMATO MAS FORMAS
     // EJEMPLO 1 --> 001
-    public void printID (int ID) {
-        System.out.printf("%0 4d" , ID);
+
+    public void printID () {
+        System.out.printf("%0 4d" , this.ID);
         System.out.println();
     }
 
-    public void  mostrarEstadisticas(Pokemon pokemon) {
-        System.out.println("NOMBRE : " + pokemon.getNAME());
-        System.out.print("ID : " ) ; pokemon.printID(pokemon.getId());
+    public void  mostrarEstadisticas() {
+        System.out.println("NOMBRE : " + getNAME());
+        System.out.print("ID : " ) ; printID();
         System.out.println("ESTADISTICAS");
         System.out.println("ATAQUE : " + getAtaque());
         System.out.println("DEFENSA : " + getDefensa());
@@ -208,53 +221,42 @@ abstract public class Pokemon {
 
     }
 
-
-    public void addAtaque(Ataque ataque) {
-        this.ataques.add(ataque);
-    }
-
-
-    public  void showAtaques (ArrayList<Ataque> ataques) {
-        for (Ataque ataque1 : ataques) {
-            System.out.println(ataque1.getName());
+    public  void showAtaques () {
+        for (int i = 0 ; i<contadorAtaques ; i++) {
+            System.out.println(this.ataques[i].getName() + i);
         }
     }
 
-    public void atacarPokemon (Ataque ataque , Pokemon pokemonAtacante, Pokemon pokemonDefensor){
+    // METODOS UTILIZANDO LA CLASE ATAQUE
 
+    public void atacarPokemon (int numeroAtaque , Pokemon pokemonDefensor){
 
-        System.out.println(pokemonAtacante.getNAME() + " USO " + ataque.getName() + " CONTRA "  + pokemonDefensor.getNAME()  );
-
+        Ataque ataque = this.getAtaqueSelect(numeroAtaque);
+        System.out.println(this.getNAME() + " USO " + ataque.getName() + " Contra "  + pokemonDefensor.getNAME()  );
         // una variable que como dice su me servira para variar el daño generado no se siempre el mismo
         double variacion = Math.random()*(1 - 0.85) + 0.85;
-        // (pokemon.getAtaque)+2
-
         double stab;
+        this.getAtaques();
         //STAB (Same Type Attack Bonus): Multiplicador de 1.5 si el tipo del movimiento coincide con uno de los tipos del Pokémon que lo usa. Si no coincide, es 1.0.
-        if (ataque.getTipo()==pokemonAtacante.getTipo1() || ataque.getTipo()==pokemonAtacante.getTipo2()) {
+        if (ataque.getTipo()==this.getTipo1() || ataque.getTipo()==this.getTipo2()) {
             stab = 1.5;
         } else {
             stab = 1.0;
         }
-
         double efectividad = Tipos.calculator_Efectividad(ataque.getTipo() , pokemonDefensor.getTIPOS() );
-
-
         double subdano = 1;
         double danoTotal;
-
         if (ataque.getClase()==0) {
             // ataque especial
-            subdano =  ((((2.0 * 10) / 5.0 + 2.0) * ataque.getPotencia() * ((double) pokemonAtacante.getAtaque() / pokemonDefensor.getDefensa())) / 50.0) + 2.0;
+            subdano =  ((((2.0 * 10) / 5.0 + 2.0) * ataque.getPotencia() * ((double) this.getAtaque() / pokemonDefensor.getDefensa())) / 50.0) + 2.0;
             danoTotal =  subdano * (stab * efectividad * variacion);
         } else {
-            double danioBase = ((((2.0 * nivel) / 5.0 + 2.0) * ataque.getPotencia() * ((double) pokemonAtacante.getAtaqueEspecial() / pokemonDefensor.getDefenseEspecial())) / 50.0) + 2.0;
+            double danioBase = ((((2.0 * nivel) / 5.0 + 2.0) * ataque.getPotencia() * ((double) this.getAtaqueEspecial() / pokemonDefensor.getDefenseEspecial())) / 50.0) + 2.0;
             danoTotal =  (   subdano * (stab * efectividad * variacion));
         }
         System.out.println(danoTotal);
 
     }
-
 
 
 } // class pokemon

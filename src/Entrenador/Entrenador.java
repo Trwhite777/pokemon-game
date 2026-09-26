@@ -1,5 +1,6 @@
 package Entrenador;
 
+import Ataques.Ataque;
 import Exepciones.Exepcions;
 import Pokemones.Pokemon;
 import Tipos.Tipos;
@@ -8,27 +9,27 @@ import java.util.ArrayList;
 
 public class Entrenador {
 
-    private ArrayList pokemonList = new ArrayList<Pokemon>(6);  ;
+    // ATRIBUTOS
+
+    private Pokemon[]  pokemonsList = new Pokemon[4];
     final private String NAMEUSER;
     final private int IDENTRENADOR = 6531;
     private int Dinero = 0;
+    private int contPokemonesActivos = 0;
+
+    //GETTERS AND SETTERS
 
     public Entrenador(String nameuser) {
         NAMEUSER = setNAMEUSER(nameuser);
     }
 
-    public ArrayList<Pokemon> getPokemonList() {
-        return pokemonList;
+    public Pokemon[] getPokemonList() {
+        return pokemonsList;
     }
 
-    public Entrenador setPokemonList(ArrayList pokemonList) {
-        this.pokemonList = pokemonList;
+    public Entrenador setPokemonList(Pokemon[] pokemonList) {
+        this.pokemonsList = pokemonList;
         return this;
-    }
-
-    public void addPokemon (Pokemon pokemon) {
-        System.out.println("Enhorabuena has obtenido a "  + pokemon.getNAME());
-        pokemonList.add(pokemon);
     }
 
     public int getDinero() {
@@ -52,6 +53,8 @@ public class Entrenador {
         return IDENTRENADOR;
     }
 
+    // METODOS PROPIOS DE ENTRENADOR
+
     public void tarjetaEntrenador () {
         System.out.println("TARJETA ENTRENADOR");
         System.out.println("NOMBRE : " + getNAMEUSER());
@@ -59,20 +62,28 @@ public class Entrenador {
         System.out.println("DINERO : " + getDinero());
     }
 
-    public void showPokemons (ArrayList<Pokemon> pokemonList) {
+    // METODOS UTILIZANDO CLASE POKEMON
+
+    public void showPokemons () {
         System.out.println("POKEMONES");
-        for (Pokemon pokemos : pokemonList ) {
-            System.out.print(pokemos.getNAME() + ": "); Tipos.showTipos(pokemos.getTIPOS());
+        for (int i=0 ; i<contPokemonesActivos ; i++ ) {
+            System.out.print(pokemonsList[i].getNAME() + ": "); Tipos.showTipos(pokemonsList[i].getTIPOS());
             System.out.println();
         }
     }
 
     public void showPokemonAtaques (int num) {
-        Pokemon pokemon = (Pokemon) pokemonList.get(num);
+        Pokemon pokemon = pokemonsList[num];
         System.out.print("pokemon " + num + " " +pokemon.getNAME() +  " ");
         System.out.println();
-        pokemon.showAtaques(pokemon.getAtaques());
+        pokemon.showAtaques();
         System.out.println();
+    }
+
+    public void addPokemon (Pokemon pokemon) {
+        System.out.println("Enhorabuena has obtenido a "  + pokemon.getNAME());
+        this.pokemonsList[contPokemonesActivos] = pokemon;
+        contPokemonesActivos++;
     }
 
 

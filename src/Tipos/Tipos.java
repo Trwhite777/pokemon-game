@@ -2,8 +2,10 @@ package Tipos;
 import Pokemones.Pokemon;
 
 public class Tipos {
-    Pokemon pokemon;
+
     static final private String[] tiposArray = {"Normal", "Fuego" , "Agua" , "Electrico" , "Planta" , "Hielo" , "Lucha" , "Veneno" , "Tierra" , "Volador" , "Psiquico" , "Insecto" , "Roca" , "Fantasma" , "Dragon" , ""};
+
+    // PINTAR TIPOS
 
     public static String getTiposArray(int tipo) {
         return tiposArray[tipo];
@@ -18,6 +20,7 @@ public class Tipos {
 
     }//showTipos
 
+    //CALCULAR LA EFECTIVIDAD
 
     public static double calculator_Efectividad (int tipoMovmiento , int[] tiposDefensorPokemonArrays) {
         // defino la efectividad total como el producto de efectividad 1 y 2

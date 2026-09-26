@@ -13,12 +13,7 @@ public static void main(String[] args) {
     Charmander charmander = new Charmander("Charmander",45,45,45,54,34,4,90,1);
     Squirtle squirtle = new Squirtle("Squirtler" , 40 ,30 ,32, 40 , 39 ,89 , 91 , 2);
     System.out.println("Hola como estas cual es tu nombre?");
-    String name = scanner.nextLine();
-    Entrenador entrenador = new Entrenador(name);
-    Entrenador entrenador1 = new Entrenador("GOLA");
-
-
-    System.out.println(razguño.getTipo());
+    Entrenador entrenador = new Entrenador("caixer");
 
 
     System.out.println("Recibe tu primer pokemon Bulbasur");
@@ -29,22 +24,16 @@ public static void main(String[] args) {
 
     entrenador.tarjetaEntrenador();
 
-    entrenador.showPokemons(entrenador.getPokemonList());
+    entrenador.showPokemons();
 
-    placaje.showMov();
 
     charmander.addAtaque(placaje);
     charmander.addAtaque(razguño);
 
 
-    entrenador1.tarjetaEntrenador();
-
-    entrenador1.showPokemons(entrenador1.getPokemonList());
-
-
 
     entrenador.showPokemonAtaques(1);
 
-    charmander.atacarPokemon(charmander.getMovimientoAtaque(1) , charmander , squirtle);
+    charmander.atacarPokemon( 1 ,   squirtle);
 }//main
 

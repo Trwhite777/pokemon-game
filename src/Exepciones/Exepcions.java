@@ -26,6 +26,8 @@ public class Exepcions extends RuntimeException{
         }
     }
 
+    //CLASES Y TIPOS EXEPCIONES
+
     public static int tipoNoExsitente (int num) {
         if (num<0 && num>12) {
             throw new IllegalArgumentException("TIPO NO EXISTENTE");
