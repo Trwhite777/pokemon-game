@@ -3,6 +3,7 @@ import Entrenador.Entrenador;
 import Pokemones.Bulbasur;
 import Pokemones.Charmander;
 import Pokemones.Squirtle;
+import Entrenador.Npc;
 
 import java.util.Scanner;
 public static void main(String[] args) {
@@ -14,26 +15,16 @@ public static void main(String[] args) {
     Squirtle squirtle = new Squirtle("Squirtler" , 40 ,30 ,32, 40 , 39 ,89 , 91 , 2);
     System.out.println("Hola como estas cual es tu nombre?");
     Entrenador entrenador = new Entrenador("caixer");
-
-
+    Npc npc = new Npc("Rival blue");
+    npc.addPokemon(bulbasur);
     System.out.println("Recibe tu primer pokemon Bulbasur");
-
-    entrenador.addPokemon(bulbasur);
-    entrenador.addPokemon(charmander);
     entrenador.addPokemon(squirtle);
-
-    entrenador.tarjetaEntrenador();
-
-    entrenador.showPokemons();
-
-
     charmander.addAtaque(placaje);
-    charmander.addAtaque(razguño);
-
-
+    bulbasur.addAtaque(placaje);
 
     entrenador.showPokemonAtaques(1);
 
     charmander.atacarPokemon( 1 ,   squirtle);
+
 }//main
 

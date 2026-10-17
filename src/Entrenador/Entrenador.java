@@ -1,12 +1,7 @@
 package Entrenador;
-
-import Ataques.Ataque;
 import Exepciones.Exepcions;
 import Pokemones.Pokemon;
 import Tipos.Tipos;
-
-import java.util.ArrayList;
-
 public class Entrenador {
 
     // ATRIBUTOS
@@ -16,6 +11,7 @@ public class Entrenador {
     final private int IDENTRENADOR = 6531;
     private int Dinero = 0;
     private int contPokemonesActivos = 0;
+    private Mochila mochila = new Mochila();
 
     //GETTERS AND SETTERS
 
@@ -53,6 +49,14 @@ public class Entrenador {
         return IDENTRENADOR;
     }
 
+    public Mochila getMochila() {
+        return mochila;
+    }
+
+    public void setMochila(Mochila mochila) {
+        this.mochila = mochila;
+    }
+
     // METODOS PROPIOS DE ENTRENADOR
 
     public void tarjetaEntrenador () {
@@ -85,6 +89,18 @@ public class Entrenador {
         this.pokemonsList[contPokemonesActivos] = pokemon;
         contPokemonesActivos++;
     }
+
+    public void  menuAccionsMain() {
+        System.out.println("==========================");
+        System.out.println("Menu Accions");
+        System.out.println("1 : HABILIDADES");
+        System.out.println("2 : MOCHILA");
+        System.out.println("3 : POKEMON");
+        System.out.println("4 : HUIR");
+        System.out.println("==========================");
+    }
+
+
 
 
 

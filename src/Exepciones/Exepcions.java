@@ -42,6 +42,29 @@ public class Exepcions extends RuntimeException{
         return num;
     }
 
+    public static int validarAccion () {
+        Scanner scanner = new Scanner(System.in);
+        boolean isValidate = true;
+        int accionValida;
+        while (isValidate) {
+           try {
+               System.out.println("INGRESE ACCION");
+               accionValida = scanner.nextInt();
+               if (accionValida > 0 && accionValida < 5) {
+                   isValidate = false;
+                   return accionValida;
+               } else {
+                   System.out.println("NO ENTA EN EL RANGO ESTABLECIDO");
+               }
+           } catch (Exception e) {
+               System.out.println("CARACTER NO VALIDA INTENTE NUEVAMENTE");
+               scanner.nextLine();
+           }
+
+        }
+
+    }
+
 
 
 

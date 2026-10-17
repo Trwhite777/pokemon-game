@@ -11,7 +11,7 @@ public class Ataque {
     final private int clase;
     final private int potencia;
     final private int precision;
-    final private int pp;
+    private int pp;
 
 
     public Ataque(String name, String descripcion, int tipo, int clase, int potencia, int precision, int pp) {
@@ -54,6 +54,11 @@ public class Ataque {
         return pp;
     }
 
+    public Ataque setPp(int pp) {
+        this.pp = pp;
+        return this;
+    }
+
     public void showClase (int clase) {
         if (clase==0) {
             System.out.println("CLASE : FISICO");
@@ -61,6 +66,8 @@ public class Ataque {
             System.out.println("CLASE : ESPECIAL");
         }
     }
+
+
 
     public void showMov () {
         System.out.println( "Nombre :"+ getName());

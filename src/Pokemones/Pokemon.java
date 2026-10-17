@@ -230,8 +230,8 @@ abstract public class Pokemon {
     // METODOS UTILIZANDO LA CLASE ATAQUE
 
     public void atacarPokemon (int numeroAtaque , Pokemon pokemonDefensor){
-
         Ataque ataque = this.getAtaqueSelect(numeroAtaque);
+        ataque.setPp(ataque.getPp()-1);
         System.out.println(this.getNAME() + " USO " + ataque.getName() + " Contra "  + pokemonDefensor.getNAME()  );
         // una variable que como dice su me servira para variar el daño generado no se siempre el mismo
         double variacion = Math.random()*(1 - 0.85) + 0.85;
