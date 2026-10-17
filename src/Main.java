@@ -8,7 +8,7 @@ import Entrenador.Npc;
 import java.util.Scanner;
 public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
-    Ataque placaje = new Ataque("Placaje","Golpea al objetivo con las extremidades, la cola o similares.",1,0,40,100,35);
+    Ataque placaje = new Ataque("Placaje","Golpea al objetivo con las extremidades, la cola o similares.",0,0,40,100,35);
     Ataque razguño = new Ataque("Razguño","Razguña al objetivo con las extremidades, la cola o similares.",0,0,40,100,35);
     Bulbasur bulbasur = new Bulbasur( "Bulbasur" , 45, 49 , 49 , 65 , 65 ,45, 12,4,7 );
     Charmander charmander = new Charmander("Charmander",45,45,45,54,34,4,90,1);

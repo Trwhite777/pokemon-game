@@ -12,7 +12,7 @@ public class Tipos {
     }
 
     public static void  showTipos(int[]tipo) {
-        if (tipo[1]==15) {
+        if (tipo[1]==-1) {
             System.out.print(getTiposArray(tipo[0]));
         } else {
             System.out.print(getTiposArray(tipo[0]) + "/" + getTiposArray(tipo[1]));
@@ -42,7 +42,7 @@ public class Tipos {
                 {0,1,1,1,1,1,1,1,1,1,2,1,1,2,1}, //13 fantasma
                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,2} //14 Dragon
         } ;
-        if (tiposDefensorPokemonArrays[1]!=15) {
+        if (tiposDefensorPokemonArrays[1]!=-1) {
             efectividadTotal *= tablaTipos[tipoMovmiento][tiposDefensorPokemonArrays[0]];
             efectividadTotal *= tablaTipos[tipoMovmiento][tiposDefensorPokemonArrays[1]];
         } else {

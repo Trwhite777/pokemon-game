@@ -19,7 +19,7 @@ abstract public class Pokemon {
     private int contadorAtaques = 0;
     final private int nivel= 10;
 
-    // Constructor Principal 1 Tipo
+    // Constructor Principal un unico Tipo
     protected Pokemon(String name, int vida , int ataque , int defensa ,int ataqueEspecial , int defenseEspecial , int velocidad , int ID , int tipo) {
         this.NAME = setNAME(name);
         this.setVida(vida);
@@ -30,7 +30,9 @@ abstract public class Pokemon {
         this.setVelocidad(velocidad);
         this.ID = setID(ID);
         this.TIPOS[0] = setTipo1(tipo);
-        this.TIPOS[1] = 15;
+        //Recordando el hecho que hay pokemones que solo tienen un tipo valido
+        //por lo que la funcion del -1 indico un indice no existente ya se que ese pokemon tiene un solo tipo
+        this.TIPOS[1] = -1;
     }
 
     // Constructor 2 tipos asignados
@@ -150,7 +152,7 @@ abstract public class Pokemon {
     }
 
     public int setTipo1(int tipo1) {
-        if (tipo1<0 || tipo1>12) {
+        if (tipo1<0 || tipo1>14) {
             throw new IllegalArgumentException("Tipo No existente");
         } else {
             return tipo1;
@@ -162,7 +164,7 @@ abstract public class Pokemon {
     }
 
     public int setTipo2(int tipo2) {
-        if (tipo2 <0 || tipo2 >12) {
+        if (tipo2 <0 || tipo2 >14) {
             throw new IllegalArgumentException("Tipo No existente");
         } else {
             return tipo2;
@@ -227,7 +229,7 @@ abstract public class Pokemon {
 
     // METODOS UTILIZANDO LA CLASE ATAQUE
 
-    public void atacarPokemon (int numeroAtaque , Pokemon pokemonDefensor){
+    public double atacarPokemon (int numeroAtaque , Pokemon pokemonDefensor){
         Ataque ataque = this.getAtaqueSelect(numeroAtaque);
         ataque.setPp(ataque.getPp()-1);
         System.out.println(this.getNAME() + " USO " + ataque.getName() + " Contra "  + pokemonDefensor.getNAME()  );
@@ -253,7 +255,7 @@ abstract public class Pokemon {
             danoTotal =  (   subdano * (stab * efectividad * variacion));
         }
         System.out.println(danoTotal);
-
+        return danoTotal;
     }
 
 
