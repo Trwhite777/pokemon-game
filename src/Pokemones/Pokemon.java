@@ -1,10 +1,8 @@
 package Pokemones;
 
 import Ataques.Ataque;
-import Exepciones.Exepcions;
+import Exepciones.Exceptions;
 import Tipos.Tipos;
-
-import java.util.ArrayList;
 
 
 abstract public class Pokemon {
@@ -59,7 +57,7 @@ abstract public class Pokemon {
     }
 
     public static String setNAME(String NAME) {
-        return Exepcions.textosVacios(NAME);
+        return Exceptions.textosVacios(NAME);
     }
 
     public double getVida() {

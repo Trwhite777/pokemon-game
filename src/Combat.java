@@ -52,6 +52,7 @@ public class Combat {
         int accion = scanner.nextByte();
         switch (accion) {
             case 1:
+                entrenadorProtagonista.showPokemonAtaques(0);
                 break;
             case 2:
                 entrenadorProtagonista.getMochila().mostrarMochila();
@@ -63,6 +64,7 @@ public class Combat {
                  System.out.println("NO PUEDES ESCAPAR DE UN COMBATE POKEMON");
                  break;
             default:
+                System.out.println("ad");
         }
     }
 
@@ -70,9 +72,8 @@ public class Combat {
         System.out.println("EMPIEZA EL COMBATE");
         npcRival.presentacion_Npc();
         while (getCombatActive()) {
-            System.out.println("Hello");
+            System.out.println("EN DESARROLLO.......");
         }
-
     }
 
 

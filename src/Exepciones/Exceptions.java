@@ -1,8 +1,7 @@
 package Exepciones;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Exepcions extends RuntimeException{
+public class Exceptions {
 
 
     public static String textosVacios (String texto) {
@@ -45,16 +44,15 @@ public class Exepcions extends RuntimeException{
     public static int validarAccion () {
         Scanner scanner = new Scanner(System.in);
         boolean isValidate = true;
-        int accionValida;
+        int accionValida = 0;
         while (isValidate) {
            try {
                System.out.println("INGRESE ACCION");
                accionValida = scanner.nextInt();
                if (accionValida > 0 && accionValida < 5) {
                    isValidate = false;
-                   return accionValida;
                } else {
-                   System.out.println("NO ENTA EN EL RANGO ESTABLECIDO");
+                   System.out.println("NO ESTA EN EL RANGO ESTABLECIDO");
                }
            } catch (Exception e) {
                System.out.println("CARACTER NO VALIDA INTENTE NUEVAMENTE");
@@ -62,7 +60,24 @@ public class Exepcions extends RuntimeException{
            }
 
         }
+        scanner.close();
+        return accionValida;
+    }
 
+    public static int validarIndicePokemonList(){
+        Scanner scanner = new Scanner(System.in);
+        int indice = 0;
+        while (true) {
+            try {
+                indice = scanner.nextInt();
+                indice--;
+                if (indice<=-1 || indice>5) {
+                    System.out.println("INDICE INVALIDO INTENTE NUEVAMENTE RECUERDE QUE ES UN DATO DE 1 A 6");
+                } else return indice;
+            } catch (Exception e) {
+                System.out.println("CARACTER INVALIDO");
+            }
+        }
     }
 
 

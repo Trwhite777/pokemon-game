@@ -22,9 +22,9 @@ public static void main(String[] args) {
     charmander.addAtaque(placaje);
     bulbasur.addAtaque(placaje);
 
-    entrenador.showPokemonAtaques(1);
+    entrenador.showPokemonAtaques(0);
 
-    charmander.atacarPokemon( 1 ,   squirtle);
+    charmander.atacarPokemon( 0,   squirtle);
 
 }//main
 

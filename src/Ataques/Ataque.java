@@ -1,6 +1,6 @@
 package Ataques;
 
-import Exepciones.Exepcions;
+import Exepciones.Exceptions;
 import Tipos.Tipos;
 
 public class Ataque {
@@ -15,13 +15,13 @@ public class Ataque {
 
 
     public Ataque(String name, String descripcion, int tipo, int clase, int potencia, int precision, int pp) {
-        this.name = Exepcions.textosVacios(name);
-        this.descripcion = Exepcions.textosVacios(descripcion);
-        this.tipo = Exepcions.tipoNoExsitente(tipo);
-        this.clase = Exepcions.claseMovimientoNovalida(clase);
-        this.potencia = Exepcions.numerosNegativos(potencia);
-        this.precision = Exepcions.numerosNegativos(precision);
-        this.pp = Exepcions.numerosNegativos(pp);
+        this.name = Exceptions.textosVacios(name);
+        this.descripcion = Exceptions.textosVacios(descripcion);
+        this.tipo = Exceptions.tipoNoExsitente(tipo);
+        this.clase = Exceptions.claseMovimientoNovalida(clase);
+        this.potencia = Exceptions.numerosNegativos(potencia);
+        this.precision = Exceptions.numerosNegativos(precision);
+        this.pp = Exceptions.numerosNegativos(pp);
 
     }
 

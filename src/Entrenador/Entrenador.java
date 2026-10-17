@@ -1,7 +1,10 @@
 package Entrenador;
-import Exepciones.Exepcions;
+import Exepciones.*;
 import Pokemones.Pokemon;
 import Tipos.Tipos;
+
+import java.util.Scanner;
+
 public class Entrenador {
 
     // ATRIBUTOS
@@ -42,7 +45,7 @@ public class Entrenador {
     }
 
     public String setNAMEUSER(String nameUser) {
-        return  Exepcions.textosVacios(nameUser);
+        return  Exceptions.textosVacios(nameUser);
     }
 
     public int getIdEntrenador() {
@@ -90,14 +93,15 @@ public class Entrenador {
         contPokemonesActivos++;
     }
 
-    public void  menuAccionsMain() {
-        System.out.println("==========================");
-        System.out.println("Menu Accions");
-        System.out.println("1 : HABILIDADES");
-        System.out.println("2 : MOCHILA");
-        System.out.println("3 : POKEMON");
-        System.out.println("4 : HUIR");
-        System.out.println("==========================");
+    public void changePokemonList () {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("CUAL POKEMON QUIERES CAMBIAR DE POSICION???");
+        showPokemons();
+        System.out.println("INGRESA EL INDICE DEL POKEMON");
+        int indicePokemon = Exceptions.validarIndicePokemonList();
+        System.out.println("INGRESA A QUE POSICIÓN QUIERES QUE ESTE");
+        byte indiceDeCambio = scanner.nextByte();
+        if (indiceDeCambio>(contPokemonesActivos+1));
     }
 
 
