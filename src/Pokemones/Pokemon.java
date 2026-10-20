@@ -16,8 +16,9 @@ abstract public class Pokemon {
     final private int ID;
     final private int[] TIPOS = new int[2];
     private Ataque[] ataques = new Ataque[4];
-    private int contadorAtaques = 0;
+    private int contadorAtaquesActivos = 0;
     final private int nivel= 10;
+    private boolean isDebilidado = false;
 
     // Constructor Principal un unico Tipo
     protected Pokemon(String name, int vida , int ataque , int defensa ,int ataqueEspecial , int defenseEspecial , int velocidad , int ID , int tipo) {
@@ -62,13 +63,13 @@ abstract public class Pokemon {
         return Exceptions.textosVacios(NAME);
     }
 
-    public double getVida() {
+    public int getVida() {
         return vida;
     }
 
     public void setVida(int vida) {
        if (vida<=0) {
-           throw new IllegalArgumentException ("VIDA NO PUDE SER NEGATIVA");
+           throw new IllegalArgumentException("Numero no puede ser negativo");
        }
             this.vida = vida;
     }
@@ -171,6 +172,23 @@ abstract public class Pokemon {
         }
     }
 
+    public void pokemonRecibeDano(int dano) {
+        this.vida = (getVida()-dano);
+        if (vida<=0) {
+            setEstadoPokemon(true);
+            System.out.println( getNAME()  + " ha sido debilitado");
+        }
+    }
+
+
+    public boolean isEstadoPokemon() {
+        return isDebilidado;
+    }
+
+    public void setEstadoPokemon(boolean estadoPokemon) {
+        this.isDebilidado = estadoPokemon;
+    }
+
     // GETTERS Y SETTER CON LA CLASE ATAQUE
 
     public Ataque[] getAtaques() {
@@ -182,9 +200,9 @@ abstract public class Pokemon {
     }
 
     public void addAtaque(Ataque ataque) {
-        if (contadorAtaques<ataques.length) {
-            ataques[contadorAtaques] = ataque;
-            contadorAtaques++;
+        if (contadorAtaquesActivos <ataques.length) {
+            ataques[contadorAtaquesActivos] = ataque;
+            contadorAtaquesActivos++;
         } else {
             ataquesLlenos();
         }
@@ -192,8 +210,8 @@ abstract public class Pokemon {
 
     public void ataquesLlenos () {
         System.out.println("TU POKEMON NO PUEDE APRENDER MAS ATAQUES");
-        for (int i = 0 ; i<contadorAtaques ; i++) {
-            System.out.println(this.ataques[contadorAtaques].getName() + i);
+        for (int i = 0; i< contadorAtaquesActivos; i++) {
+            System.out.println(this.ataques[contadorAtaquesActivos].getName() + i);
         }
         System.out.println("CUAL ATAQUE QUIERES REMPLAZAR?");
     }
@@ -222,14 +240,14 @@ abstract public class Pokemon {
     }
 
     public  void showAtaques () {
-        for (int i = 0 ; i<contadorAtaques ; i++) {
+        for (int i = 0; i< contadorAtaquesActivos; i++) {
             System.out.println(this.ataques[i].getName() + i);
         }
     }
 
     // METODOS UTILIZANDO LA CLASE ATAQUE
 
-    public double atacarPokemon (int numeroAtaque , Pokemon pokemonDefensor){
+    public void atacarPokemon (int numeroAtaque , Pokemon pokemonDefensor){
         Ataque ataque = this.getAtaqueSelect(numeroAtaque);
         ataque.setPp(ataque.getPp()-1);
         System.out.println(this.getNAME() + " USO " + ataque.getName() + " Contra "  + pokemonDefensor.getNAME()  );
@@ -254,8 +272,9 @@ abstract public class Pokemon {
             double danioBase = ((((2.0 * nivel) / 5.0 + 2.0) * ataque.getPotencia() * ((double) this.getAtaqueEspecial() / pokemonDefensor.getDefenseEspecial())) / 50.0) + 2.0;
             danoTotal =  (   subdano * (stab * efectividad * variacion));
         }
-        System.out.println(danoTotal);
-        return danoTotal;
+        System.out.println((int) danoTotal);
+
+        pokemonDefensor.pokemonRecibeDano ((int) danoTotal);
     }
 
 

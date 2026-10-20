@@ -1,15 +1,16 @@
 package Entrenador;
-import Exepciones.*;
 import Pokemones.Pokemon;
 import Tipos.Tipos;
 
 import java.util.Scanner;
 
+import static Exepciones.Exceptions.*;
+
 public class Entrenador {
 
     // ATRIBUTOS
 
-    private Pokemon[]  pokemonsList = new Pokemon[4];
+    private Pokemon[]  pokemonsList = new Pokemon[6];
     final private String NAMEUSER;
     final private int IDENTRENADOR = 6531;
     private int Dinero = 0;
@@ -45,7 +46,7 @@ public class Entrenador {
     }
 
     public String setNAMEUSER(String nameUser) {
-        return  Exceptions.textosVacios(nameUser);
+        return  textosVacios(nameUser);
     }
 
     public int getIdEntrenador() {
@@ -74,7 +75,7 @@ public class Entrenador {
     public void showPokemons () {
         System.out.println("POKEMONES");
         for (int i=0 ; i<contPokemonesActivos ; i++ ) {
-            System.out.print(pokemonsList[i].getNAME() + ": "); Tipos.showTipos(pokemonsList[i].getTIPOS());
+            System.out.print((i+1) + " " +pokemonsList[i].getNAME() + ": " + Tipos.showTipos(pokemonsList[i].getTIPOS()));
             System.out.println();
         }
     }
@@ -88,20 +89,54 @@ public class Entrenador {
     }
 
     public void addPokemon (Pokemon pokemon) {
-        System.out.println("Enhorabuena has obtenido a "  + pokemon.getNAME());
-        this.pokemonsList[contPokemonesActivos] = pokemon;
-        contPokemonesActivos++;
+        if (contPokemonesActivos==6) {
+            System.out.println("NO PUEDES TENER MAS POKEMONES ");
+        } else {
+            System.out.println("Enhorabuena has obtenido a "  + pokemon.getNAME());
+            this.pokemonsList[contPokemonesActivos] = pokemon;
+            contPokemonesActivos++;
+        }
     }
 
     public void changePokemonList () {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("CUAL POKEMON QUIERES CAMBIAR DE POSICION???");
         showPokemons();
         System.out.println("INGRESA EL INDICE DEL POKEMON");
-        int indicePokemon = Exceptions.validarIndicePokemonList();
+        int indicePokemon = validarIndicePokemonList(contPokemonesActivos);
         System.out.println("INGRESA A QUE POSICIÓN QUIERES QUE ESTE");
-        byte indiceDeCambio = scanner.nextByte();
-        if (indiceDeCambio>(contPokemonesActivos+1));
+        byte indiceDeCambio = (byte) validarIndicePokemonList(contPokemonesActivos);
+        Pokemon pokemonTemporal = pokemonsList[indiceDeCambio];
+        pokemonsList[indiceDeCambio] = pokemonsList[indicePokemon];
+        pokemonsList[indicePokemon] = pokemonTemporal;
+
+
+    }
+
+    public void atacarPokemon(Pokemon pokemonDefensor) {
+        pokemonsList[0].atacarPokemon(0,pokemonDefensor);
+    }
+
+
+    public void deletePokemon () {
+        System.out.println("Que pokemon deseas liberar???");
+        showPokemons();
+        System.out.println("ingresa el indice");
+        int indicePokemonLiberado = validarIndicePokemonList(contPokemonesActivos);
+
+        pokemonsList[indicePokemonLiberado] = null;
+        // para que no encontrar valores nulos entre el array por ejemplo
+        // si eliminan al pokemon en la posicion 4 y hay un pokemon en la posicion 5
+        // no quede un valor nulo en el medio
+        if (pokemonsList[5]==null || pokemonsList[indicePokemonLiberado+1]==null) {
+            this.contPokemonesActivos--;
+            System.out.println("no habia pokemon siguiente");
+        } else {
+            for (int i=indicePokemonLiberado; i < contPokemonesActivos;i++) {
+                if (i==5) break;
+                pokemonsList[i]= pokemonsList[i+1];
+            }
+            this.contPokemonesActivos--;
+        }
     }
 
 

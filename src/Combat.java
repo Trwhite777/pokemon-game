@@ -53,6 +53,7 @@ public class Combat {
         switch (accion) {
             case 1:
                 entrenadorProtagonista.showPokemonAtaques(0);
+                entrenadorProtagonista.atacarPokemon(npcRival.getPokemonList()[0]);
                 break;
             case 2:
                 entrenadorProtagonista.getMochila().mostrarMochila();

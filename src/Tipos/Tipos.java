@@ -11,11 +11,11 @@ public class Tipos {
         return tiposArray[tipo];
     }
 
-    public static void  showTipos(int[]tipo) {
+    public static String  showTipos(int[]tipo) {
         if (tipo[1]==-1) {
-            System.out.print(getTiposArray(tipo[0]));
+            return getTiposArray(tipo[0]);
         } else {
-            System.out.print(getTiposArray(tipo[0]) + "/" + getTiposArray(tipo[1]));
+            return (getTiposArray(tipo[0]) + "/" + getTiposArray(tipo[1]));
         }
 
     }//showTipos

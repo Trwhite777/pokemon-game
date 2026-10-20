@@ -2,10 +2,10 @@ package Exepciones;
 import java.util.Scanner;
 
 public class Exceptions {
+    static Scanner scanner = new Scanner(System.in);
 
 
     public static String textosVacios (String texto) {
-        Scanner scanner = new Scanner(System.in);
         while (texto.isEmpty()) {
             try {
                 System.out.println("NOMBRE VACIO !!!!!");
@@ -28,7 +28,7 @@ public class Exceptions {
     //CLASES Y TIPOS EXEPCIONES
 
     public static int tipoNoExsitente (int num) {
-        if (num<0 && num>12) {
+        if (num<0 && num>14) {
             throw new IllegalArgumentException("TIPO NO EXISTENTE");
         }
         return num;
@@ -42,7 +42,6 @@ public class Exceptions {
     }
 
     public static int validarAccion () {
-        Scanner scanner = new Scanner(System.in);
         boolean isValidate = true;
         int accionValida = 0;
         while (isValidate) {
@@ -60,24 +59,24 @@ public class Exceptions {
            }
 
         }
-        scanner.close();
         return accionValida;
     }
 
-    public static int validarIndicePokemonList(){
-        Scanner scanner = new Scanner(System.in);
+    public static int validarIndicePokemonList(int contPokemonesActivos){
         int indice = 0;
         while (true) {
             try {
                 indice = scanner.nextInt();
                 indice--;
-                if (indice<=-1 || indice>5) {
-                    System.out.println("INDICE INVALIDO INTENTE NUEVAMENTE RECUERDE QUE ES UN DATO DE 1 A 6");
-                } else return indice;
+                if (indice<=-1 || indice>contPokemonesActivos) {
+                    System.out.println("INDICE INVALIDO INTENTE NUEVAMENTE RECUERDE QUE ES UN DATO DE 1 A " + contPokemonesActivos);
+                } else break;
             } catch (Exception e) {
                 System.out.println("CARACTER INVALIDO");
+                scanner.nextLine();
             }
         }
+        return indice;
     }
 
 
