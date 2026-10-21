@@ -9,13 +9,14 @@ public class Combat {
     Entrenador entrenadorProtagonista;
     boolean isCombatActive;
 
-
     public Combat (Npc npcRival , Entrenador entrenadorProtagonista ) {
         this.npcRival = npcRival;
         this.entrenadorProtagonista = entrenadorProtagonista;
         this.isCombatActive = true;
         inicioCombate();
     }
+
+
 
 
     public Npc  getNpcRival() {

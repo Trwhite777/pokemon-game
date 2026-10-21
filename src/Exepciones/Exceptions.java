@@ -64,13 +64,15 @@ public class Exceptions {
 
     public static int validarIndicePokemonList(int contPokemonesActivos){
         int indice = 0;
+        System.out.println(contPokemonesActivos);
+        contPokemonesActivos--;
         while (true) {
             try {
                 indice = scanner.nextInt();
                 indice--;
                 if (indice<=-1 || indice>contPokemonesActivos) {
-                    System.out.println("INDICE INVALIDO INTENTE NUEVAMENTE RECUERDE QUE ES UN DATO DE 1 A " + contPokemonesActivos);
-                } else break;
+                    System.out.println("INDICE INVALIDO INTENTE NUEVAMENTE RECUERDE QUE ES UN DATO DE 1 A " + (contPokemonesActivos+1) );
+                } else  break;
             } catch (Exception e) {
                 System.out.println("CARACTER INVALIDO");
                 scanner.nextLine();

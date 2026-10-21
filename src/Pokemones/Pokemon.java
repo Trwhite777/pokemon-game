@@ -5,7 +5,7 @@ import Exepciones.Exceptions;
 import Tipos.Tipos;
 
 
-abstract public class Pokemon {
+public class Pokemon {
     final private String NAME;
     private int vida;
     private int ataque;
@@ -18,7 +18,7 @@ abstract public class Pokemon {
     private Ataque[] ataques = new Ataque[4];
     private int contadorAtaquesActivos = 0;
     final private int nivel= 10;
-    private boolean isDebilidado = false;
+    private boolean isDebilitado = false;
 
     // Constructor Principal un unico Tipo
     protected Pokemon(String name, int vida , int ataque , int defensa ,int ataqueEspecial , int defenseEspecial , int velocidad , int ID , int tipo) {
@@ -50,6 +50,23 @@ abstract public class Pokemon {
         this.TIPOS[1] = setTipo2(tipo2);
     }
 
+    // Clonacion de objetos
+
+    public Pokemon (Pokemon pokemon) {
+        this.NAME = pokemon.getNAME();
+        this.setVida(pokemon.getVida());
+        this.setAtaque(pokemon.getAtaque());
+        this.setAtaqueEspecial(pokemon.getAtaqueEspecial());
+        this.setDefensa(pokemon.getDefensa());
+        this.setDefenseEspecial(pokemon.getDefenseEspecial());
+        this.setVelocidad(pokemon.getVelocidad());
+        this.ID = setID(pokemon.getId());
+        this.TIPOS[0] = setTipo1(pokemon.getTipo1());
+        this.TIPOS[1] = setTipo2(pokemon.getTipo2());
+        this.setAtaques(pokemon.getAtaques());
+        this.setIsDebilitado(pokemon.getIsDebilitado());
+    }
+
 
 
     // GETTER AND SETTERS
@@ -68,7 +85,7 @@ abstract public class Pokemon {
     }
 
     public void setVida(int vida) {
-       if (vida<=0) {
+       if (vida<0) {
            throw new IllegalArgumentException("Numero no puede ser negativo");
        }
             this.vida = vida;
@@ -164,8 +181,12 @@ abstract public class Pokemon {
         return TIPOS[1];
     }
 
+    public void setAtaques(Ataque[] ataques) {
+        this.ataques = ataques;
+    }
+
     public int setTipo2(int tipo2) {
-        if (tipo2 <0 || tipo2 >14) {
+        if (tipo2 <-1 || tipo2 >14) {
             throw new IllegalArgumentException("Tipo No existente");
         } else {
             return tipo2;
@@ -173,20 +194,20 @@ abstract public class Pokemon {
     }
 
     public void pokemonRecibeDano(int dano) {
-        this.vida = (getVida()-dano);
-        if (vida<=0) {
-            setEstadoPokemon(true);
+        if (dano>=vida) {
+            setIsDebilitado(true);
             System.out.println( getNAME()  + " ha sido debilitado");
-        }
+            this.vida=0;
+        } else this.vida = (getVida()-dano);
     }
 
 
-    public boolean isEstadoPokemon() {
-        return isDebilidado;
+    public boolean getIsDebilitado() {
+        return isDebilitado;
     }
 
-    public void setEstadoPokemon(boolean estadoPokemon) {
-        this.isDebilidado = estadoPokemon;
+    public void setIsDebilitado(boolean isDebilitado) {
+        this.isDebilitado = isDebilitado;
     }
 
     // GETTERS Y SETTER CON LA CLASE ATAQUE
@@ -241,7 +262,7 @@ abstract public class Pokemon {
 
     public  void showAtaques () {
         for (int i = 0; i< contadorAtaquesActivos; i++) {
-            System.out.println(this.ataques[i].getName() + i);
+            System.out.println(this.ataques[i].getName() + " "+ (i+1) );
         }
     }
 
@@ -273,7 +294,6 @@ abstract public class Pokemon {
             danoTotal =  (   subdano * (stab * efectividad * variacion));
         }
         System.out.println((int) danoTotal);
-
         pokemonDefensor.pokemonRecibeDano ((int) danoTotal);
     }
 

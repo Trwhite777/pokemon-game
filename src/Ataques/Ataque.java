@@ -1,6 +1,6 @@
 package Ataques;
 
-import Exepciones.Exceptions;
+import Exepciones.*;
 import Tipos.Tipos;
 
 public class Ataque {

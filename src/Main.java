@@ -13,29 +13,24 @@ public static void main(String[] args) {
     Bulbasur bulbasur = new Bulbasur( "Bulbasur" , 45, 49 , 49 , 65 , 65 ,45, 12,4,7 );
     Charmander charmander = new Charmander("Charmander",45,10000,45,54,34,4,90,1);
     Squirtle squirtle = new Squirtle("Squirtler" , 40 ,30 ,32, 40 , 39 ,89 , 91 , 2);
+    Charmander maniqui = new Charmander("Charmander",1000000000,10000,45,54,34,4,90,1);
     Entrenador entrenador = new Entrenador("caixer");
     Npc npc = new Npc("Rival blue");
-    npc.addPokemon(bulbasur);
-    entrenador.addPokemon(charmander);
+
+    squirtle.pokemonRecibeDano(100000);
+    bulbasur.pokemonRecibeDano(100000);
+
+
     entrenador.addPokemon(squirtle);
     entrenador.addPokemon(bulbasur);
     entrenador.addPokemon(charmander);
-    entrenador.addPokemon(squirtle);
-    entrenador.addPokemon(bulbasur);
-    entrenador.addPokemon(charmander);
-    entrenador.addPokemon(squirtle);
-    entrenador.addPokemon(bulbasur);
-    charmander.addAtaque(placaje);
-    bulbasur.addAtaque(placaje);
 
-
-
+    entrenador.iniciaCombate();
 
     entrenador.showPokemons();
 
-    entrenador.deletePokemon();
 
-    entrenador.showPokemons();
+
 
 }//main
 
